@@ -1,0 +1,9 @@
+{
+  "root": "src",
+  "rules": [
+    "index.ts",
+    "utils/*.ts",
+    "interfaces/I*.ts",
+    ".structurelintrc"
+  ]
+}
