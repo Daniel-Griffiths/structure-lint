@@ -4,17 +4,11 @@ A linter to check the directory/file structure of your projects.
 
 ![Tests](https://github.com/Daniel-Griffiths/structure-lint/actions/workflows/publish.yml/badge.svg)
 
-## Install CLI
-
-Install globally with npm
+## Install globally
 
 ```bash
 npm install -g structure-lint
-```
-
-Or with Yarn
-
-```bash
+# Or Yarn
 yarn global add structure-lint
 ```
 
@@ -22,11 +16,7 @@ yarn global add structure-lint
 
 ```bash
 npm install structure-lint
-```
-
-Or with Yarn
-
-```bash
+# Or Yarn
 yarn add structure-lint
 ```
 
