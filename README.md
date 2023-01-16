@@ -32,7 +32,7 @@ Then add the following command to your package.json file:
 
 ## Usage
 
-Create a `.structlintrc` file in the root of your project. See the example config file below:
+Create a `.structurelintrc` file in the root of your project. See the example config file below:
 
 ```json
 {
