@@ -1,4 +1,4 @@
-import mockFilesystem from "mock-fs";
+import { vol, fs } from "memfs";
 
 import { getConfig } from "../src/utils/getConfig";
 import { isCorrectRuleType } from "../src/utils/isCorrectRuleType";
@@ -8,14 +8,19 @@ import { getSubsequentPaths } from "../src/utils/getSubsequentPaths";
 /**
  * Prevent process.exit calls from killing jest
  */
-jest.spyOn(process, "exit").mockImplementation((code: number): never => {
+jest.spyOn(process, "exit").mockImplementation((code): never => {
   return null as never;
 });
 
-afterEach(mockFilesystem.restore);
+jest.mock("fs", () => fs);
+jest.mock("fs/promises", () => fs.promises);
+
+afterEach(() => {
+  vol.reset();
+});
 
 it("can take a path rule and get all subsequent paths", async () => {
-  mockFilesystem({
+  vol.fromNestedJSON({
     "components/really/long/_/path/structure/Example.tsx": "",
   });
 
@@ -33,7 +38,7 @@ it("can take a path rule and get all subsequent paths", async () => {
 });
 
 it("can check if a path matches the rule type", async () => {
-  mockFilesystem({
+  vol.fromNestedJSON({
     "components/button/Button.tsx": "",
   });
 
@@ -70,14 +75,16 @@ it("can parse the config file", async () => {
     rules: ["components/**/*.ts"],
   };
 
-  mockFilesystem({
+  vol.fromNestedJSON({
     ".structurelintrc": JSON.stringify(config),
   });
 
   expect(getConfig()).toStrictEqual(config);
+});
 
-  mockFilesystem({
-    ".wrongfilename": JSON.stringify(config),
+it("exists when the lint file does not exist", async () => {
+  vol.fromNestedJSON({
+    ".wrongfilename": JSON.stringify({}),
   });
 
   getConfig();

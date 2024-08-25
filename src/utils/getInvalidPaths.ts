@@ -1,5 +1,5 @@
 import glob from "fast-glob";
-import minimatch from "minimatch";
+import { minimatch } from "minimatch";
 
 import { IConfig } from "../interfaces/IConfig";
 import { isCorrectRuleType } from "./isCorrectRuleType";
